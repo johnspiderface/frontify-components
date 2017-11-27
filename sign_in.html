@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign In - Field-Level and Page-Level</title>
+<style>
+	.errorMsg-container {
+		display: inline-block;
+	}
+	.errorMsg {
+		color: red;
+	}
+	#pageErrorMsg-container {
+		width: 30%;
+		min-width: 300px;
+		margin: 20px 0px;
+		color: red;
+	}
+	.offscreen {
+		border: 0;
+	    clip: rect(0 0 0 0);
+	    height: 1px;
+	    width: 1px;
+	    margin: -1px;
+	    padding: 0;
+	    overflow: hidden;
+	    position: absolute;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var uError = "<span class='offscreen'>Error: </span>Please enter your username.";
+var pError = "<span class='offscreen'>Error: </span>Please enter your password.";
+var totalError = "The info you entered doesn't match our records. Please try again.";
+
+$(document).ready(function() {
+
+	/* FIELD-LEVEL ERRORS */
+	$('input[type=text]').blur(function() {
+		var id = $(this).attr('id');
+		if ($(this).val().length > 0 || $(this).siblings('span').text().length > 0) {
+			return true;
+		} else {
+			if (id == 'username') {
+				$('#uname-error').append(uError);
+				$(this).attr('aria-invalid','true');
+			} else if (id == 'pw') {
+				$('#pw-error').append(pError);
+				$(this).attr('aria-invalid','true');
+			}
+		}
+	});
+
+	/* PAGE-LEVEL ERROR */
+	var textInputs = $('input[type=text]');
+
+	$('#signinBtn').click(function() {
+		var invalid = false;
+		$.each(textInputs, function() {
+			if ($(this).attr('aria-invalid') == true) invalid = true;
+		});
+		if (invalid = true) {
+			$('#pageErrorMsg-container').append(totalError);
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+<main>
+	<div id="pageErrorMsg-container" role="alert" aria-atomic="true" aria-relevant="all" tabindex="-1"></div>
+	<form aria-labelledby="signin-h1">
+		<h1 id="signin-h1">Sign In To Your Account</h1>
+		<label for="username">Username</label>
+		<div class="errorMsg-container">
+			<input type="text" id="username" required="true" aria-invalid="false" />
+			<span id="uname-error" class="errorMsg" aria-live="polite"></span>
+		</div><br>
+		<label for="pw">Password</label>
+		<div class="errorMsg-container">
+			<input type="text" id="pw" required="true" aria-invalid="false" />
+			<span id="pw-error" class="errorMsg" aria-live="polite"></span>
+		</div><br><br>
+		<button id="signinBtn" type="button">Sign In</button>
+	</form>
+</main>
+</body>
+</html>

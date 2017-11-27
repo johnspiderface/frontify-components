@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global rDVR Notification - Focus</title>
+<style>
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	setTimeout(function() {
+		$('#inner').focus();
+	},1500);
+
+	$('#reconnBtn').click(function() {
+		$(this).parent().hide();
+		alert('Reconnecting to DVR on OVP.')
+	});
+});
+</script>
+</head>
+<body>
+
+<!-- Do we have enough control to set focus on <header>, or will we have to put on outer container? -->
+
+<div id="bannerContainer" aria-live="polite" aria-atomic="false">
+	<header id="rdvr" role="banner" tabindex="-1">
+		<div id="inner" tabindex="-1">Watching: Game of Thrones S1 E4 on Living Room STB <button id="reconnBtn" aria-label="Reconnect">Reconnect ></button></div>
+	</header>
+</div>
+<div id="skip-container">
+	<a href="#target" class="visuallyhidden focusable">Skip to Main Content</a>
+</div>
+
+<main>
+	<h1 id="target">Main Heading of Page</h1>
+</main>
+
+</body>
+</html>

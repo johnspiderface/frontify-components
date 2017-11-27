@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page-Level Error</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#errorMsg').hide();
+
+	$('#submitBtn').click(function() {
+		$('#errorMsg').show().focus();
+	})
+});
+</script>
+</head>
+<body>
+<main>
+
+<div id="errorMsg" tabindex="-1" role="region">
+	<p>Please correct the following errors.</p>
+</div>
+
+
+<label for="username">Username</label><input type="text" id="username">
+<button id="submitBtn">Submit</button>
+
+
+</main>
+</body>
+</html>

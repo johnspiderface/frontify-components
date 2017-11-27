@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global Error Notification - Live Region</title>
+<style>
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	var thisString = '<header id="global-error" role="banner">This is a short global error message <button id="closeBtn" aria-label="dismiss message">x</button></header>';
+
+	setTimeout(function() {
+		$('#bannerContainer').append(thisString);
+		$('#closeBtn').click(function() {
+			$(this).parent().hide();
+		});
+	},3000);
+});
+</script>
+</head>
+<body>
+
+
+<div id="bannerContainer" role="alert" aria-atomic="false"></div>
+<div id="skip-container">
+	<a href="#target" class="visuallyhidden focusable">Skip to Main Content</a>
+</div>
+
+<main>
+	<h1 id="target">Main Heading of Page</h1>
+</main>
+
+</body>
+</html>

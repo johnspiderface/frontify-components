@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Field-Level Error</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	var usernameError = false;
+	var pwError = false;
+
+	$('#username').blur(function() {
+		if (!usernameError) {
+			$('#errorUsername').append("Please enter username").attr('aria-invalid','true');
+			usernameError = true;
+		} else {
+			return;
+		}
+	});
+	$('#pw').blur(function() {
+		if (!pwError) {
+			$('#errorPw').append("Please enter password").attr('aria-invalid','true');
+			pwError = true;
+		} else {
+			return;
+		}
+	});
+});
+</script>
+</head>
+<body>
+<main>
+
+
+
+<label for="username">Username</label>
+<div class="errorGroup">
+	<input type="text" id="username" aria-describedby="errorUsername" aria-required="true" aria-invalid="false">
+	<div id="errorUsername" role="alert"></div>
+</div>
+
+<br>
+
+
+<label for="pw">Password</label>
+<div class="errorGroup">
+	<input type="text" id="pw" aria-describedby="errorPw" aria-required="true" aria-invalid="false">
+	<div id="errorPw" role="alert"></div>
+</div>
+
+<br>
+
+
+<button>Submit</button>
+
+
+
+</main>
+</body>
+</html>

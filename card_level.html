@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Card-Level Error</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#errorMsg').hide();
+
+	$('#confirmBtn').click(function() {
+		$('#errorMsg').show().focus();
+	})
+
+});
+</script>
+</head>
+<body>
+<main>
+
+
+
+<section aria-labelledby="h2-cardtitle" id="cardContainer">
+	<div tabindex="-1" id="errorMsg">Alert: This is a container-level error message.</div>
+	<h2 id="h2-cardtitle">Card Title</h2>
+	<p>This is a short line of card content.</p>
+	<button id="confirmBtn">Confirm Information</button>
+</section>
+
+
+
+</main>
+</body>
+</html>

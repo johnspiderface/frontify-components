@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global Confirm Notification - Focus</title>
+<style>
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	setTimeout(function() {
+		$('#inner').focus();
+	},1500);
+
+	setTimeout(function() {
+		$('#confirmation').fadeOut();
+	},5000);
+});
+</script>
+</head>
+<body>
+
+<!-- Do we have enough control to set focus on inner <header>, or will we have to put on outer container? -->
+<header>
+	<div id="bannerContainer" aria-live="polite" aria-atomic="false">
+		<header id="confirmation" role="banner">
+			<div id="inner" tabindex="-1">This is a short confirmation message</div>
+		</header>
+	</div>
+	<div id="skip-container">
+		<a href="#target" class="visuallyhidden focusable">Skip to Main Content</a>
+	</div>
+</header>
+<main>
+	<h1 id="target">Main Heading of Page</h1>
+</main>
+
+</body>
+</html>
