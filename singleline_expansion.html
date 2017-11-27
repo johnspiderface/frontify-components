@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expansion Panel - Single Line</title>
+<style>
+#card1 {
+	width:60%;
+	border:2px solid #D8DDE6;
+	padding: 0 3%;
+}
+#h2-1 {
+	display: inline-block;
+}
+#caret-img {
+	width: 25px;
+	height: 25px;
+	margin: 18px 0;
+	float:right;
+}
+#h3-1 {
+	display:inline-block;
+	margin-left: 60%;
+}
+hr {
+	color:#D8DDE6;
+}
+th, td {
+	text-align: left;
+	padding-left: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	cardOpen = false;
+	$('#expandedContents').hide();
+
+	$('#card1').click(function() {
+		if (cardOpen) {
+			return;
+		} else {
+			$('#expandedContents').show();
+			$('#caret-img').attr('src','../img/caret_up.png').attr('tabindex','0').focus();
+			$('#card1').attr('tabindex','-1');
+			cardOpen = true;
+		}
+	});
+
+	$('#caret-img').click(function(e) {
+		e.stopPropagation();
+		if (!cardOpen) {
+			return;
+		} else {
+			$('#expandedContents').hide();
+			$('#caret-img').attr('src','../img/caret_down.png').attr('tabindex','-1');
+			$('#card1').attr('tabindex','0').focus();
+			cardOpen = false;
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+<main>
+
+<!-- running into issue that all the li's are read out when the tooltip appears because of the live region -->
+<!-- solution :  apply the aria-live attribute once it appears -->
+
+<div id="card1" role="region" aria-labelledby="h2-1" aria-expanded="false" tabindex="0">
+	<h2 id="h2-1">Recent Purchases</h2> <img id="caret-img" src="../img/caret_down.png">
+	<div id="expandedContents">
+		<table>
+			<tr>
+				<th>Date</th><th>Description</th><th>Date Posted</th><th>Amount</th>
+			</tr>
+			<tr>
+				<td>12/16/16</td><td>On Demand - Cars (HD)</td><td>12/16/16</td><td>$1.99</td>
+			</tr>
+			<tr>
+				<td>11/16/16</td><td>On Demand - Up (HD)</td><td>11/16/16</td><td>$1.99</td>
+			</tr>
+			<tr>
+				<td>10/16/16</td><td>On Demand - Monsters University (HD)</td><td>10/16/16</td><td>$1.99</td>
+			</tr>
+		</table>
+		<hr>
+		<h3 id="h3-1">Total Balance: $5.97</h3>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</main>
+</body>
+</html>

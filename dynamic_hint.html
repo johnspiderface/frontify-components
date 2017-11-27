@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Hint</title>
+<style>
+	ul {
+		padding: 0;
+	}
+	li {
+		list-style-type: none;
+	}
+	#tooltip {
+		position:relative;
+		left:150px;
+		width: 250px;
+		border: 2px solid gray;
+		border-radius: 8px;
+		padding:12px;
+	}
+	#heading {
+		font-size:1.05em;
+		font-weight: bold;
+	}
+	img {
+		width:15px;
+		height:15px;
+		margin-right: 5px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	$('#tooltip').hide();
+
+	$('#pw').focus(function() {
+		$('#tooltip').show();
+	});
+	$('#pw').blur(function() {
+		$('#tooltip').hide();
+	})
+
+	$('#pw').keyup(function() {
+		switch ($('#pw').val().length) {
+			case 8:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/invalid.png');
+				$('#crit2').attr('alt','invalid, ');
+				$('#crit3').attr('src','../img/invalid.png');
+				$('#crit3').attr('alt','invalid, ');
+				$('#crit4').attr('src','../img/invalid.png');
+				$('#crit4').attr('alt','invalid, ');
+				break;
+			case 9:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/invalid.png');
+				$('#crit3').attr('alt','invalid, ');
+				$('#crit4').attr('src','../img/invalid.png');
+				$('#crit4').attr('alt','invalid, ');
+				break;
+			case 10:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/invalid.png');
+				$('#crit4').attr('alt','invalid, ');
+				break;
+			case 11:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/valid.png');
+				$('#crit4').attr('alt','valid, ');
+				break;
+			case 12:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/valid.png');
+				$('#crit4').attr('alt','valid, ');
+				break;
+			case 13:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/valid.png');
+				$('#crit4').attr('alt','valid, ');
+				break;
+			case 14:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/valid.png');
+				$('#crit4').attr('alt','valid, ');
+				break;
+			case 15:
+				$('#crit1').attr('src','../img/valid.png');
+				$('#crit1').attr('alt','valid, ');
+				$('#crit2').attr('src','../img/valid.png');
+				$('#crit2').attr('alt','valid, ');
+				$('#crit3').attr('src','../img/valid.png');
+				$('#crit3').attr('alt','valid, ');
+				$('#crit4').attr('src','../img/valid.png');
+				$('#crit4').attr('alt','valid, ');
+				break;
+			default:
+				$('#crit1').attr('src','../img/invalid.png');
+				$('#crit1').attr('alt','invalid, ');
+				$('#crit2').attr('src','../img/invalid.png');
+				$('#crit2').attr('alt','invalid, ');
+				$('#crit3').attr('src','../img/invalid.png');
+				$('#crit3').attr('alt','invalid, ');
+				$('#crit4').attr('src','../img/invalid.png');
+				$('#crit4').attr('alt','invalid, ');
+				break;
+		}
+	});
+});
+</script>
+</head>
+<body>
+<main>
+
+<!-- running into issue that all the li's are read out when the tooltip appears because of the live region -->
+<!-- solution :  apply the aria-live attribute once it appears -->
+
+<label for="pw">Password</label><br>
+<input type="password" id="pw" name="pw" aria-describedby="tooltip">
+<div id="tooltip">
+	<div id="heading">Please choose a password that follows these guidelines:</div>
+	<ul>
+		<li aria-live="assertive" aria-atomic="true"><img id="crit1" alt="invalid, " src="../img/invalid.png">Use letters, numbers and special characters (except forward/back slashes, quotation marks and the > symbol)</li>
+		<li aria-live="assertive" aria-atomic="true"><img id="crit2" alt="invalid, " src="../img/invalid.png">Keep length between 8 and 15 characters</li>
+		<li aria-live="assertive" aria-atomic="true"><img id="crit3" alt="invalid, " src="../img/invalid.png">Use at least 1 uppercase and 1 lowercase letter and 1 number</li>
+		<li aria-live="assertive" aria-atomic="true"><img id="crit4" alt="invalid, " src="../img/invalid.png">Don't include your username or any of the following terms as part of your password: charter, password, default, changeme, 123, abc, or xyz</li>
+	</ul>
+</div>
+
+
+</main>
+</body>
+</html>

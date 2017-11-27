@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data Tables</title>
+<style>
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#errorMsg').hide();
+
+	$('#submitBtn').click(function() {
+		$('#errorMsg').show().focus();
+	})
+});
+</script>
+</head>
+<body>
+<main>
+
+
+<!-- how does the below work with NVDA? -->
+
+<div role="grid" aria-readonly="true">
+	<div class="row1" role="row">
+		<div class="columnA" role="columnheader">Scheduled Payments</div>
+		<div class="columnB" role="columnheader">Type</div>
+		<div class="columnC" role="columnheader">Status</div>
+		<div class="columnD" role="columnheader">Amount</div>
+	</div>
+	<div class="row2" role="row">
+		<div class="columnA" role="gridcell">03/01/17</div>
+		<div class="columnB" role="gridcell">Credit Card</div>
+		<div class="columnC" role="gridcell">Processing</div>
+		<div class="columnD" role="gridcell">$99.99</div>
+	</div>
+	<div class="row3" role="row">
+		<div class="columnA" role="gridcell">02/01/17</div>
+		<div class="columnB" role="gridcell">Credit Card</div>
+		<div class="columnC" role="gridcell">Paid</div>
+		<div class="columnD" role="gridcell">$99.99</div>
+	</div>
+	<div class="row4" role="row">
+		<div class="columnA" role="gridcell">01/01/17</div>
+		<div class="columnB" role="gridcell">Credit Card</div>
+		<div class="columnC" role="gridcell">Paid</div>
+		<div class="columnD" role="gridcell">$99.99</div>
+	</div>
+</div>
+
+
+</main>
+</body>
+</html>
