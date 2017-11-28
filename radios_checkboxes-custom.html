@@ -33,7 +33,7 @@ $(document).ready(function() {
 		groupID = $('#' + arg).parent().parent().attr('id');
 		radiosInGroupObj = $('#' + groupID).find('span');
 		$.each(radiosInGroupObj, function() {
-			$(this).attr('aria-checked','false').children('img').attr('src','radio_false.png');
+			$(this).attr('aria-checked','false').children('img').attr('src','img/radio_false.png');
 		});
 	}
 
@@ -47,19 +47,19 @@ $(document).ready(function() {
 		var thisID = $(this).attr('id');
 		if (inputType == 'checkbox') {
 			if ($(this).attr('aria-checked') == 'false') {
-				$(this).children('img').attr('src','checkbox_true.png');
+				$(this).children('img').attr('src','img/checkbox_true.png');
 				$(this).attr('aria-checked','true');
 			} else {
-				$(this).children('img').attr('src','checkbox_false.png');
+				$(this).children('img').attr('src','img/checkbox_false.png');
 				$(this).attr('aria-checked','false');
 			}
 		} else if (inputType == 'radio') {
 			checkRadio(thisID);
 			if ($(this).attr('aria-checked') == 'false') {
-				$(this).children('img').attr('src','radio_true.png');
+				$(this).children('img').attr('src','img/radio_true.png');
 				$(this).attr('aria-checked','true');
 			} else {
-				$(this).children('img').attr('src','radio_false.png');
+				$(this).children('img').attr('src','img/radio_false.png');
 				$(this).attr('aria-checked','false');
 			}
 		}
@@ -190,26 +190,26 @@ $(document).ready(function() {
 	<fieldset>
 		<legend>Pizza Toppings</legend>
 		<div class="inputGroup">
-			<span id="cheese" role="checkbox" aria-labelledby="cheese-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="checkbox_false.png"></span><label id="cheese-label">Cheese</label>
+			<span id="cheese" role="checkbox" aria-labelledby="cheese-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="img/checkbox_false.png"></span><label id="cheese-label">Cheese</label>
 		</div>
 		<div class="inputGroup">
-			<span id="pepperoni" role="checkbox" aria-labelledby="pepperoni-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="checkbox_false.png"></span><label id="pepperoni-label">Pepperoni</label>
+			<span id="pepperoni" role="checkbox" aria-labelledby="pepperoni-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="img/checkbox_false.png"></span><label id="pepperoni-label">Pepperoni</label>
 		</div>
 		<div class="inputGroup">
-			<span id="sausage" role="checkbox" aria-labelledby="sausage-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="checkbox_false.png"></span><label id="sausage-label">Sausage</label>
+			<span id="sausage" role="checkbox" aria-labelledby="sausage-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="img/checkbox_false.png"></span><label id="sausage-label">Sausage</label>
 		</div>
 		<div class="inputGroup">
-			<span id="mushrooms" role="checkbox" aria-labelledby="mushrooms-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="checkbox_false.png"></span><label id="mushrooms-label">Mushrooms</label>
+			<span id="mushrooms" role="checkbox" aria-labelledby="mushrooms-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="img/checkbox_false.png"></span><label id="mushrooms-label">Mushrooms</label>
 		</div>
 	</fieldset>
 
 	<fieldset id="radiogroup3">
 		<legend>Payment Method</legend>
 		<div class="radio1">
-			<span id="credit-span" role="radio" name="payment" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="1"><img src="radio_false.png"></span><label id="credit-label">Credit Card</label>
+			<span id="credit-span" role="radio" name="payment" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="1"><img src="img/radio_false.png"></span><label id="credit-label">Credit Card</label>
 		</div>
 		<div class="radio1">
-			<span id="cash-span" role="radio" name="payment" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="2"><img src="radio_false.png"></span><label id="cash-label">Cash</label>
+			<span id="cash-span" role="radio" name="payment" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="2"><img src="img/radio_false.png"></span><label id="cash-label">Cash</label>
 		</div>
 	</fieldset>
 </form>
@@ -220,25 +220,25 @@ $(document).ready(function() {
 	<div role="group" aria-labelledby="h3-2">
 		<h3 id="h3-2">Pizza Toppings</h3>
 		<div class="inputGroup">
-			<span id="cheese2" role="checkbox" aria-labelledby="cheese-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="checkbox_false.png"></span><label id="cheese-label2">Cheese</label>
+			<span id="cheese2" role="checkbox" aria-labelledby="cheese-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="img/checkbox_false.png"></span><label id="cheese-label2">Cheese</label>
 		</div>
 		<div class="inputGroup">
-			<span id="pepperoni2" role="checkbox" aria-labelledby="pepperoni-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="checkbox_false.png"></span><label id="pepperoni-label2">Pepperoni</label>
+			<span id="pepperoni2" role="checkbox" aria-labelledby="pepperoni-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="img/checkbox_false.png"></span><label id="pepperoni-label2">Pepperoni</label>
 		</div>
 		<div class="inputGroup">
-			<span id="sausage2" role="checkbox" aria-labelledby="sausage-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="checkbox_false.png"></span><label id="sausage-label2">Sausage</label>
+			<span id="sausage2" role="checkbox" aria-labelledby="sausage-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="img/checkbox_false.png"></span><label id="sausage-label2">Sausage</label>
 		</div>
 		<div class="inputGroup">
-			<span id="mushrooms2" role="checkbox" aria-labelledby="mushrooms-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="checkbox_false.png"></span><label id="mushrooms-label2">Mushrooms</label>
+			<span id="mushrooms2" role="checkbox" aria-labelledby="mushrooms-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="img/checkbox_false.png"></span><label id="mushrooms-label2">Mushrooms</label>
 		</div>
 	</div>
 	<div id="radiogroup4" role="radiogroup" aria-labelledby="h3-3" aria-required="true" aria-invalid="false">
 		<h3 id="h3-3">Payment Method</h3>
 		<div class="radio2">
-			<span id="credit2-span" role="radio" aria-labelledby="credit-label2" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="1"><img src="radio_false.png"></span><label id="credit-label2">Credit Card</label>
+			<span id="credit2-span" role="radio" aria-labelledby="credit-label2" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="1"><img src="img/radio_false.png"></span><label id="credit-label2">Credit Card</label>
 		</div>
 		<div class="radio2">
-			<span id="cash2-span" role="radio" aria-labelledby="cash-label2" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="2"><img src="radio_false.png"></span><label id="cash-label2">Cash</label>
+			<span id="cash2-span" role="radio" aria-labelledby="cash-label2" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="2"><img src="img/radio_false.png"></span><label id="cash-label2">Cash</label>
 		</div>
 	</div>
 </form>
