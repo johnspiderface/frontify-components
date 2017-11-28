@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Modals</title>
+<style>
+	input[type="radio"] {
+		margin-right: 5px;
+	}
+	.closeBtn {
+		float:right;
+	}
+	.modalContainer {
+		width: 60%;
+		height: 210px;
+		margin: 0 auto;
+		padding: 13px 17px;
+		box-shadow: 0 4px 6px 0 rgba(112, 130, 156, 0.3);
+		border: solid 1px #d8dde6;
+	}
+	h2 {
+		text-align: center;
+	}
+	p {
+		text-align: center;
+	}
+	.primaryCTA {
+		width: 210px;
+		height: 42px;
+		color: #fff;
+		border-radius: 6px;
+		background-color: #007ac2;
+		font-size:.9em;
+	}
+	.btnContainer {
+		margin: 30px auto 15px auto;
+		text-align: center;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	$('.modalContainer').hide();
+
+	$('#openModal').click(function() {
+		hideAll();
+		if ($('input[name="modals"]').is(':checked')) {
+			var modalType = $('input[name="modals"]:checked').val();
+			switch (modalType) {
+				case 'typeA':
+					openTypeA();
+					break;
+				case 'typeB':
+					openTypeB();
+					break;
+				case 'typeC':
+					openTypeC();
+					break;
+				case 'typeD':
+					openTypeD();
+					break;
+			}
+		} else {
+			alert('Please select an option');
+		}
+	});
+
+	$('.closeBtn').click(function() {
+		hideAll();
+	});
+	$('.primaryCTA').click(function() {
+		hideAll();
+	});
+
+	function openTypeA() {
+		$('#typeA').show();
+		$('#closeBtn1').focus();
+	}
+	function openTypeB() {
+		$('#typeB').show();
+		$('#primaryCTABtn2').focus();
+	}
+	function openTypeC() {
+		$('#typeC').show();
+		$('#h2-3').focus();
+	}
+	function openTypeD() {
+		$('#typeD').show();
+		$('#closeBtn4').focus();
+	}
+
+	function hideAll() {
+		$('.modalContainer').hide();
+	}
+
+});
+</script>
+</head>
+<body>
+<main>
+
+<div role="radiogroup">
+	<input id="radio-regionContainer" type="radio" name="modals" value="typeA"><label for="radio-regionContainer">Modal with role="region" and focus on Close Button</label><br>
+	<input id="radio-dialogCTA" type="radio" name="modals" value="typeB"><label for="radio-dialogCTA">Modal with role="dialog" and focus on Primary CTA</label><br>
+	<input id="radio-dialogDocContainer" type="radio" name="modals" value="typeC"><label for="radio-dialogDocContainer">Modal with role="dialog" and "document" and focus on Heading</label><br>
+	<input id="radio-dialogDocClose" type="radio" name="modals" value="typeD"><label for="radio-dialogDocClose">Modal with role="dialog" and "document" and focus on Close Button</label><br>
+</div>
+<button id="openModal">Open Modal</button>
+
+
+<div id="typeA" class="modalContainer" role="region" aria-label="region dialog">
+	<button id="closeBtn1" class="closeBtn" aria-label="close dialog">x</button>
+	<h2 id="h2-1">Standard Modal Title</h2>
+	<label for="text1">Username</label><input id="text1" type="text">
+	<p>Standard modals can contain a combination of content including: microcopy, icons, illustrations, form elements, etc.</p>
+	<div class="btnContainer">
+		<button class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
+	</div>
+</div>
+
+<div id="typeB" class="modalContainer" role="dialog" aria-labelledby="h2-2" aria-describedby="p2">
+	<button id="closeBtn2" class="closeBtn" aria-label="close dialog">x</button>
+	<h2 id="h2-2">Standard Modal Title</h2>
+	<p id="p2">Standard modals can contain a combination of content including: microcopy, icons, illustrations, form elements, etc.</p>
+	<div class="btnContainer">
+		<button id="primaryCTABtn2" class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
+	</div>
+</div>
+
+<div id="typeC" class="modalContainer" role="dialog" aria-labelledby="h2-3">
+	<div id="docContainer3" role="document" tabindex="-1">
+		<button id="closeBtn3" class="closeBtn" aria-label="close dialog">x</button>
+		<h2 id="h2-3" tabindex="-1">Standard Modal Title</h2>
+		<p>Standard modals can contain a combination of content including: microcopy, icons, illustrations, form elements, etc.</p>
+		<div class="btnContainer">
+			<button class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
+		</div>
+	</div>
+</div>
+
+<div id="typeD" class="modalContainer" role="dialog" tabindex="-1" aria-labelledby="h2-4">
+	<div role="document">
+		<button id="closeBtn4" class="closeBtn" aria-label="close dialog">x</button>
+		<h2 id="h2-4">Standard Modal Title</h2>
+		<p>Standard modals can contain a combination of content including: microcopy, icons, illustrations, form elements, etc.</p>
+		<div class="btnContainer">
+			<button class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
+		</div>
+	</div>
+</div>
+
+
+
+</main>
+</body>
+</html>

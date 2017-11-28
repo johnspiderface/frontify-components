@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Custom Radios and Checkboxes</title>
+<style>
+fieldset {
+	margin: 25px;
+	width: 50%;
+	min-width: 400px;
+}
+img {
+	width: 16px;
+	height: 16px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	// ensures that radio buttons are mutually exclusive
+	// switches img.src and span.aria-checked
+	/* requires this structure:
+		<div id="">
+			<span role="radio" aria-checked="false" tabindex="0">
+				<img src="radio_false.png">
+			</span>
+			<span role="radio" aria-checked="true" tabindex="-1">
+				<img src="radio_true.png">
+			</span>
+		</div>
+	*/
+	function checkRadio(arg) {
+		groupID = $('#' + arg).parent().parent().attr('id');
+		radiosInGroupObj = $('#' + groupID).find('span');
+		$.each(radiosInGroupObj, function() {
+			$(this).attr('aria-checked','false').children('img').attr('src','radio_false.png');
+		});
+	}
+
+	$('label').click(function() {
+		var assocInput = $('[aria-labelledby="' + this.id + '"]')[0];
+		$(assocInput).click();
+	});
+
+	$('span').click(function () {
+		var inputType = $(this).attr('role');
+		var thisID = $(this).attr('id');
+		if (inputType == 'checkbox') {
+			if ($(this).attr('aria-checked') == 'false') {
+				$(this).children('img').attr('src','checkbox_true.png');
+				$(this).attr('aria-checked','true');
+			} else {
+				$(this).children('img').attr('src','checkbox_false.png');
+				$(this).attr('aria-checked','false');
+			}
+		} else if (inputType == 'radio') {
+			checkRadio(thisID);
+			if ($(this).attr('aria-checked') == 'false') {
+				$(this).children('img').attr('src','radio_true.png');
+				$(this).attr('aria-checked','true');
+			} else {
+				$(this).children('img').attr('src','radio_false.png');
+				$(this).attr('aria-checked','false');
+			}
+		}
+	});
+
+	$('span[role=checkbox]').keydown(function (e) {
+		var which = e.which;
+		if (which === 13 || which === 32) {
+			e.preventDefault();
+			e.target.click();
+		}
+	});
+
+	$('span[role=radio]').keydown(function (keyVent) {
+		var which = keyVent.which;
+		var target = keyVent.target;
+
+		var radioID = $(this).attr('id');
+		var groupID = $('#' + radioID).parent().parent().attr('id');
+		var radiosInGroupObj = $('#' + groupID).find('span');
+		var radioIDs = [];
+		$.each(radiosInGroupObj, function() {
+			radioIDs.push($(this).attr('id'));
+		});
+
+		var thisID = $(this).attr('id');
+		var thisIndex = radioIDs.indexOf(thisID);
+
+		var lastIndex = radioIDs.length - 1;
+
+		if (which === 37 || which === 38) { // LEFT |or| UP
+			if (thisIndex == 0) {
+				var lastID = radioIDs[lastIndex];
+				$('#' + lastID).focus().click().attr('tabindex','0');
+				$('#' + radioIDs[thisIndex]).attr('tabindex','-1');
+			} else {
+				var prevIndex = parseInt(thisIndex)-1;
+				var prevID = radioIDs[prevIndex];
+				$('#' + prevID).focus().click().attr('tabindex','0');
+				$('#' + radioIDs[thisIndex]).attr('tabindex','-1');
+			}
+			keyVent.preventDefault(); 
+		} else if (which === 39 || which === 40) { // RIGHT |or| DOWN
+			if (thisIndex == lastIndex) {
+				var firstID = radioIDs[0];
+				$('#' + firstID).focus().click().attr('tabindex','0');
+				$('#' + radioIDs[thisIndex]).attr('tabindex','-1');
+			} else {
+				var nextIndex = parseInt(thisIndex)+1;
+				var nextID = radioIDs[nextIndex];
+				$('#' + nextID).focus().click().attr('tabindex','0');
+				$('#' + radioIDs[thisIndex]).attr('tabindex','-1');
+			}
+			keyVent.preventDefault(); 
+		} else if (which == 13 || which == 32) {
+			$(this).click().focus();
+			keyVent.preventDefault();
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+
+<h2>Typical Native Controls with Fieldset</h1>
+
+<form>
+	<fieldset>
+		<legend>Pizza Toppings</legend>
+		<div class="inputGroup">
+			<input id="cheese" type="checkbox" name="toppings[]"><label for="cheese">Cheese</label>
+		</div>
+		<div class="inputGroup">
+			<input id="pepperoni" type="checkbox" name="toppings[]"><label for="pepperoni">Pepperoni</label>
+		</div>
+		<div class="inputGroup">
+			<input id="sausage" type="checkbox" name="toppings[]"><label for="sausage">Sausage</label>
+		</div>
+		<div class="inputGroup">
+			<input id="mushrooms" type="checkbox" name="toppings[]"><label for="mushrooms">Mushrooms</label>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Payment Method</legend>
+		<div class="inputGroup">
+			<input id="credit" type="radio" name="payment"><label for="credit">Credit Card</label>
+		</div>
+		<div class="inputGroup">
+			<input id="cash" type="radio" name="payment"><label for="cash">Cash</label>
+		</div>
+	</fieldset>
+</form>
+
+<h2>Typical Native Controls with ARIA Grouping</h2>
+
+<form>
+	<div role="group" aria-labelledby="h3-2">
+		<h3 id="h3-2">Pizza Toppings</h3>
+		<div class="inputGroup">
+			<input id="cheese2" type="checkbox" name="toppings2[]" required="true"><label for="cheese2">Cheese</label>
+		</div>
+		<div class="inputGroup">
+			<input id="pepperoni2" type="checkbox" name="toppings2[]" required="true"><label for="pepperoni2">Pepperoni</label>
+		</div>
+		<div class="inputGroup">
+			<input id="sausage2" type="checkbox" name="toppings2[]" required="true"><label for="sausage2">Sausage</label>
+		</div>
+		<div class="inputGroup">
+			<input id="mushrooms2" type="checkbox" name="toppings2[]" required="true"><label for="mushrooms2">Mushrooms</label>
+		</div>
+	</div>
+	<div role="radiogroup" aria-labelledby="h3-3" aria-required="true" aria-invalid="false">
+		<h3 id="h3-3">Payment Method</h3>
+		<div class="inputGroup">
+			<input id="credit" type="radio" name="payment"><label for="credit">Credit Card</label>
+		</div>
+		<div class="inputGroup">
+			<input id="cash" type="radio" name="payment"><label for="cash">Cash</label>
+		</div>
+	</div>
+</form>
+
+<h2>Custom Controls with Fieldset</h1>
+
+<form>
+	<fieldset>
+		<legend>Pizza Toppings</legend>
+		<div class="inputGroup">
+			<span id="cheese" role="checkbox" aria-labelledby="cheese-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="checkbox_false.png"></span><label id="cheese-label">Cheese</label>
+		</div>
+		<div class="inputGroup">
+			<span id="pepperoni" role="checkbox" aria-labelledby="pepperoni-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="checkbox_false.png"></span><label id="pepperoni-label">Pepperoni</label>
+		</div>
+		<div class="inputGroup">
+			<span id="sausage" role="checkbox" aria-labelledby="sausage-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="checkbox_false.png"></span><label id="sausage-label">Sausage</label>
+		</div>
+		<div class="inputGroup">
+			<span id="mushrooms" role="checkbox" aria-labelledby="mushrooms-label" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="checkbox_false.png"></span><label id="mushrooms-label">Mushrooms</label>
+		</div>
+	</fieldset>
+
+	<fieldset id="radiogroup3">
+		<legend>Payment Method</legend>
+		<div class="radio1">
+			<span id="credit-span" role="radio" name="payment" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="1"><img src="radio_false.png"></span><label id="credit-label">Credit Card</label>
+		</div>
+		<div class="radio1">
+			<span id="cash-span" role="radio" name="payment" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="2"><img src="radio_false.png"></span><label id="cash-label">Cash</label>
+		</div>
+	</fieldset>
+</form>
+
+<h2>Custom Controls with ARIA Grouping</h2>
+
+<form>
+	<div role="group" aria-labelledby="h3-2">
+		<h3 id="h3-2">Pizza Toppings</h3>
+		<div class="inputGroup">
+			<span id="cheese2" role="checkbox" aria-labelledby="cheese-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="1"><img src="checkbox_false.png"></span><label id="cheese-label2">Cheese</label>
+		</div>
+		<div class="inputGroup">
+			<span id="pepperoni2" role="checkbox" aria-labelledby="pepperoni-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="2"><img src="checkbox_false.png"></span><label id="pepperoni-label2">Pepperoni</label>
+		</div>
+		<div class="inputGroup">
+			<span id="sausage2" role="checkbox" aria-labelledby="sausage-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="3"><img src="checkbox_false.png"></span><label id="sausage-label2">Sausage</label>
+		</div>
+		<div class="inputGroup">
+			<span id="mushrooms2" role="checkbox" aria-labelledby="mushrooms-label2" aria-checked="false" tabindex="0" aria-setsize="4" aria-posinset="4"><img src="checkbox_false.png"></span><label id="mushrooms-label2">Mushrooms</label>
+		</div>
+	</div>
+	<div id="radiogroup4" role="radiogroup" aria-labelledby="h3-3" aria-required="true" aria-invalid="false">
+		<h3 id="h3-3">Payment Method</h3>
+		<div class="radio2">
+			<span id="credit2-span" role="radio" aria-labelledby="credit-label2" aria-checked="false" tabindex="0" aria-setsize="2" aria-posinset="1"><img src="radio_false.png"></span><label id="credit-label2">Credit Card</label>
+		</div>
+		<div class="radio2">
+			<span id="cash2-span" role="radio" aria-labelledby="cash-label2" aria-checked="false" tabindex="-1" aria-setsize="2" aria-posinset="2"><img src="radio_false.png"></span><label id="cash-label2">Cash</label>
+		</div>
+	</div>
+</form>
+
+<br><br><button id="testBtn">Click Test</button>
+
+
+
+
+
+
+</body>
+</html>
