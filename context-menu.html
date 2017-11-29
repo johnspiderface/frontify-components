@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Context Menu</title>
+<style>
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+main {
+	padding: 40px;
+}
+div#cardContainer {
+	width: 70%;
+	min-width: 500px;
+	height: 25px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	box-shadow: 0 3px 1px 0 rgba(99, 115, 138, 0.12), 0 3px 3px 0 rgba(99, 115, 138, 0.14), 0 1px 5px 0 rgba(99, 115, 138, 0.2);
+	border: solid 1px #d8dde6;
+	padding:10px;
+}
+h3 {
+	display: inline-block;
+	float: left;
+	margin:0;
+}
+span#menuBtn {
+	cursor: pointer;
+	float: right;
+	display: inline-block;
+}
+img#dots-img {
+	width:20px;
+	height:auto;
+}
+div#menuContainer {
+	position: absolute;
+	display: block;
+	width: 80px;
+	height: auto;
+	background-color: #fff;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style-type: none;
+	width: 100%;
+	height: 25px;
+	border: 1px solid gray;
+	vertical-align: middle;
+}
+li a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	$('#menuContainer').hide();
+
+	$('#menuBtn').click(function() {
+		// get position of target
+		var xPos = $(this).offset().left + 10;
+		var yPos = $(this).offset().top + 10;
+
+		$('#menuContainer').show().css('left',xPos).css('top',yPos);
+		$('#pageWrapper').attr('aria-hidden','true');
+
+		$('#playLink').focus();
+	});
+
+	$('#menuBtn').keydown(function (e) {
+		var which = e.which;
+		if (which === 13 || which === 32) {
+			e.preventDefault();
+			e.target.click();
+		}
+	});
+
+	$('a.menuItem').keydown(function (keyVent) {
+		var which = keyVent.which;
+		var thisID = $(this).attr('id');
+
+		var menu = $(this).parent().parent();
+		var menuID = menu.attr('id');
+
+		var menuItems = menu.find('a');
+		var menuItemsIDs = [];
+		$.each(menuItems, function() {
+			menuItemsIDs.push($(this).attr('id'));
+		});
+
+		var thisIndex = menuItemsIDs.indexOf(thisID);
+		var lastIndex = menuItemsIDs.length - 1;
+
+		if (which === 37 || which === 38) { // LEFT |or| UP
+			if (thisIndex == 0) {
+				var lastID = menuItemsIDs[lastIndex];
+				$('#' + lastID).focus().click().attr('tabindex','0');
+				$('#' + menuItemsIDs[thisIndex]).attr('tabindex','-1');
+			} else {
+				var prevIndex = parseInt(thisIndex)-1;
+				var prevID = menuItemsIDs[prevIndex];
+				$('#' + prevID).focus().click().attr('tabindex','0');
+				$('#' + menuItemsIDs[thisIndex]).attr('tabindex','-1');
+			}
+			keyVent.preventDefault(); 
+		} else if (which === 39 || which === 40) { // RIGHT |or| DOWN
+			if (thisIndex == lastIndex) {
+				var firstID = menuItemsIDs[0];
+				$('#' + firstID).focus().click().attr('tabindex','0');
+				$('#' + menuItemsIDs[thisIndex]).attr('tabindex','-1');
+			} else {
+				var nextIndex = parseInt(thisIndex)+1;
+				var nextID = menuItemsIDs[nextIndex];
+				$('#' + nextID).focus().click().attr('tabindex','0');
+				$('#' + menuItemsIDs[thisIndex]).attr('tabindex','-1');
+			}
+			keyVent.preventDefault(); 
+		} else if (which == 13 || which == 32) {
+			alert('Action complete.');
+			keyVent.preventDefault();
+		} else if (which == 27) {
+			$('#pageWrapper').attr('aria-hidden','false');
+			$('#menuBtn').focus();
+			$('#menuContainer').hide();
+		} else if (which == 9) {
+			keyVent.preventDefault();
+			$('#pageWrapper').attr('aria-hidden','false');
+			if (keyVent.shiftKey) {
+				$('#beforeLink').focus();
+			} else {
+				$('#afterLink').focus();
+			}
+			$('#menuContainer').hide();
+		}
+	});
+});
+</script>
+</head>
+<body>
+<main>
+	<div id="pageWrapper">
+		<a id="beforeLink" href="#">LINK BEFORE</a>
+		<h2>Big Bang Theory Episode List</h2>
+		<div id="cardContainer">
+			<div>
+				<h3>Season 2 Episode 4: The Quantifiable Formidability</h3>
+				<span id="menuBtn" role="button" aria-label="Season 2 Episode 4, Options" aria-expanded="false" tabindex="0"><img id="dots-img" src="img/threedots.png"></span>
+			</div>
+		</div>
+		<a id="afterLink" href="#">LINK AFTER</a>
+	</div>
+	<div id="menuContainer">
+		<ul id="outerMenu" role="menu">
+			<li role="none">
+				<a id="playLink" class="menuItem" role="menuitem" tabindex="0" aria-label="Play">Play</a>
+			</li>
+			<li role="none">
+				<a id="cancelLink" class="menuItem" role="menuitem" tabindex="-1" aria-label="Cancel">Cancel</a>
+			</li>
+			<li role="none">
+				<a id="deleteLink" class="menuItem" role="menuitem" tabindex="-1" aria-label="Delete">Delete</a>
+			</li>
+		</ul>
+	</div>
+</main>
+</body>
+</html>
