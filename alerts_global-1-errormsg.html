@@ -28,19 +28,22 @@
 $(document).ready(function() {
 	var thisString = '<header id="global-error" role="banner">This is a short global error message <button id="closeBtn" aria-label="dismiss message">x</button></header>';
 
-	setTimeout(function() {
-		$('#bannerContainer').append(thisString);
-		$('#closeBtn').click(function() {
-			$(this).parent().hide();
-		});
-	},3000);
+// 	setTimeout(function() {
+// 		$('#bannerContainer').append(thisString);
+// 		$('#closeBtn').click(function() {
+// 			$(this).parent().hide();
+// 		});
+// 	},3000);
 });
 </script>
 </head>
 <body>
 
 
-<div id="bannerContainer" role="alert" aria-atomic="false"></div>
+<!-- <div id="bannerContainer" role="alert" aria-atomic="false"></div> -->
+<div role="banner">
+    <div role="alert">This is a short global error message</div><button>dismiss</button>
+</div>
 <div id="skip-container">
 	<a href="#target" class="visuallyhidden focusable">Skip to Main Content</a>
 </div>
