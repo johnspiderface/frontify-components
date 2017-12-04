@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Skip Link</title>
+<style>
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script></script>
+</head>
+<body>
+
+<header>
+  <div id="skip-container">
+    <a href="#target" class="visuallyhidden focusable">Skip to Main Content</a>
+  </div>
+</header>
+
+<main>
+	<h1 id="target">Main Heading of Page</h1>
+</main>
+
+</body>
+</html>
