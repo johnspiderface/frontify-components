@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Card Link?</title>
+<style>	
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+</style>
+</head>
+<body>
+
+<h1>Manage Accounts</h1>
+
+<p id="note" style="display:none">notification</p>
+
+<a aria-labelledby="self note" id="self" href="#" onclick="alert('Create Account');">
+	<h2>AAA Auto</h2>
+	<p>This is where the description goes. The description should not exceed 250 characters.</p>
+	<p>Incomplete Account</p>
+	<span class="visuallyhidden">Opens in dialog</span>
+</a>
+
+<footer>Copyright shit</footer>
+
+</body>
+</html>
