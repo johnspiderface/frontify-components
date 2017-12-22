@@ -59,6 +59,9 @@ $(document).ready(function() {
 				case 'typeD':
 					openTypeD();
 					break;
+				case 'typeE':
+					openTypeD();
+					break;
 			}
 		} else {
 			alert('Please select an option');
@@ -87,6 +90,10 @@ $(document).ready(function() {
 	function openTypeD() {
 		$('#typeD').show();
 		$('#closeBtn4').focus();
+	}
+	function openTypeE() {
+		$('#typeE').show();
+		$('#h2-5').focus();
 	}
 
 	function hideAll() {
@@ -147,6 +154,15 @@ $(document).ready(function() {
 			<button class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
 		</div>
 	</div>
+</div>
+
+<div id="typeE" class="modalContainer" role="dialog" tabindex="-1" aria-labelledby="h2-5">
+		<button id="closeBtn5" class="closeBtn" aria-label="close dialog">x</button>
+		<h2 id="h2-5" tabindex="-1">Standard Modal Title</h2>
+		<p>Standard modals can contain a combination of content including: microcopy, icons, illustrations, form elements, etc.</p>
+		<div class="btnContainer">
+			<button class="primaryCTA" aria-label="primary CTA">Primary CTA</button>
+		</div>
 </div>
 
 
